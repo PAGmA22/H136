@@ -1,0 +1,10 @@
+2018-10-29 23:34:11,488 - ERROR - Camera cannot be reached. Probably off.
+2018-10-30 17:22:40,272 - ERROR - Camera cannot be reached. Probably off.
+2019-09-17 17:26:59,740 - ERROR - Camera cannot be reached. Probably off.
+2021-10-02 22:16:02,158 - ERROR - Camera cannot be reached. Probably off.
+2021-10-02 22:18:10,517 - ERROR - Camera cannot be reached. Probably off.
+2021-10-02 22:20:47,236 - ERROR - Camera cannot be reached. Probably off.
+2021-10-02 22:26:22,251 - ERROR - Camera cannot be reached. Probably off.
+2021-10-02 22:34:11,632 - ERROR - Camera cannot be reached. Probably off.
+2021-10-02 22:35:46,796 - ERROR - Camera cannot be reached. Probably off.
+2021-10-02 23:53:17,614 - ERROR - Camera cannot be reached. Probably off.
