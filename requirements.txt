@@ -1,0 +1,13 @@
+tk
+gphoto2
+pillow
+pandas
+google-auth
+google_auth_oauthlib
+google-api-python-client
+google-auth-httplib2
+gpiozero
+gphoto2
+dropbox
+protobuf
+RPi.GPIO
