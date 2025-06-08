@@ -22,134 +22,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 class PhotoBox():
-
-        
-    PHRASES = [
-        'Joa kruzifix no moal',
-        'A Mann wie a Buam',
-        'A buab ohne Ranzen \n is a Krüppl'
-        'Raus aus dem Bild, NPC'
-        'A Sau gaudi \n a hia',
-        'mia san bia',
-        'Nico san bi',
-        'mia san mia',
-        'a gscheita Bierduarscht',
-        'hau di hera, \n dann samma mehra',
-        'i mog di',
-        'i mog di ni',
-        'O Zapft is',
-        'Muuuuuuuuuuuuuuuuuhria'
-        'Heizt die Fritteuse, \n Maria kommt'
-        'Oans, zwoa, drei gsuffa!',
-        'Primitive Bauerntölpel',
-        'I glab dia \n brennt der Huat',
-        'Glei foid da Wadschnbam um',
-        'Schleich di',
-        'I kimm ned auf \n der Brennsubbn \n daher!',
-        'Cheeeese',
-        'Er muss stinken!',
-        'Du hast disch glatt halbiert!',
-        'Hello Bitches',
-        'Fick die FDP!',
-        'Fick die AFD!',
-        'Fuck Putin!',
-        'Irgendwo ist immer \n Weihnachten!',
-        'Ein Nasenexpresso \n wäre jetzt formidabel!',
-        'Marcel Dumm ist \n ne schöne Fotze',
-        'Sex ist immer gut!',
-        'Lieber gar nicht \n daten, als Franzi zu daten',
-        'Marcel Schön ist \n ne dumme Fotze',
-        'Fick mich in den \n Arsch und gib \n mir Tiernamen',
-        'Lieber ungefickt als Justin',
-        'Markus und Kim forever \n and ever and ever',
-        'Fortnite ist cool',
-        'Ich habe mich rasiert, \n ich komm in die Stadt!',
-        'Mit rasiertem Arsch klingt \n der Furz anders!',
-        'Besser zwei Damen im Arm \n als zwei Arme im Darm!',
-        'Die Rosette ist blau, \n 3 Nippel sind geil!',
-        'Nippel raus',
-        'Fick die CDU',
-        'Show me your genitals',
-        'Zeig Scheide',
-        'Geil!',
-        'Ex mal!',
-        'Uuuuultra Bock',
-        'send nudes',
-        'Und die 6',
-        'Benni ist bi',
-        'Man sieht deine Nippel',
-        'Halt’s Maul Nine',
-        'Dein Hoden hängt raus',
-        'Ihr seid nicht besoffen \n genug',
-        '"Man muss den Menschen \n betrachten"',
-        'Das würde ich auch machen \n wenn ich nüchtern bin',
-        'Trink mal mehr du schockst \n noch garnicht',
-        'Schock mal mehr du trinkst \n noch garnicht',
-        'Kiffgras ist kein Brokkoli ',
-        '"Ich würde auch koksen wenn \n meine Mutter daneben steht"',
-        'Finger in Po, Mexiko',
-        'An Error uccured! You are \n too ugly', 
-        'Das ist ja jetzt nicht \n so crispy ',
-        'Achtung der Todesficker \n kommt',
-        'Wartet auf Piet',
-        'Wer ist Random Tim?',
-        'Verhüllt eure Körper',
-        'Bam Bam Bababamm',
-        'An Error uccured! Nicht \n genügend Speicherplatz! \n Lol verarscht.',
-        'Folgt uns auf OnlyFans',
-        'Bierträäääänk',
-        '"Geil!"',
-        'Bisschen Flex! Geil!',
-        'Gehts noch?',
-        'Guckt in die Kamara \n hinter euch!',
-        'Und jetzt einen Schlauchen!',
-        '"Die Jungs von der \n Straße sind mir heilig!"',
-        '"Und dann verlieeeben \n die sich auch noch!" ',
-        'Schläft Nico schon?',
-        'Schwabbel wabbel will \n Maria noch ein Sahnetörtchen',
-        'Ganz schön mutig für \n eure Gesichter',
-        'Mmmh Interessant',
-        '"Ist das ein Klasse \n drei Laser?"',
-        'Marcel verteilt Shots',
-        'Habt ihr mein Keta gesehen?',
-        '"Habt ihr noch Peps dabei?"',
-        '„Ja neee …äääh …doch“ \n - Dj Bügelbrett',
-        '„Sei der Friede den du in \n der Welt sehen willst“ \n-DJ Nazikinderficker',
-        '„Säufste stirbste. Säufste \n nicht Stirbste och!“ \n-Gabber Gandhi',
-        '"I cant shuff my fist in your \n Childhood Dreams" \n- Dr. Michael Heuer',
-        '"Merkel mach Shisha auf!"',
-        '"Charakterficken fand \n ich noch nie schön" ',
-        '"I Dont have feelings, \n cause feelings are gay"',
-        'have feelings, cause feelings',
-        'Sauf, Sauf, Sauf \n Schluck Schluck, Schluck!',
-        '„Ich bin schwul, \n also bin ich“ -Nico',
-        'Nächste Woche, \n selbe Uhrzeit!',
-        '„Niemand hat die Absicht \n die Klimaziele zu verschieben“ \n - Armin Laschet',
-        '"Ich tue das, weil ich ein \n absolut reines Gewissen habe"',
-        'Schämt ihr euch nicht',
-        'Zappzarapp Anzeige!',
-        'Eure Eltern hätten \n Abtreiben sollen',
-        'Ganz links auf dem \n Sofa hat Franky hingekotzt!',
-        'Ob ich Schwitze?',
-        'Fionas FickBar nur \n über den Hintereingang \n betreten',
-        'Nicht so tief Rüdiger!',
-        'Sie haben mich ins \n Gesicht gefilmt!',
-        '"Du bist so süß!"',
-        'Wenn ich kotzen will, \n fotografier ich mich selbst!',
-        'Ich bin das ungewollte Kind \n von Gabbi und seinem PC',
-        'Afterhour in der K30',
-        'Die beiden rechts sind \n nicht im Bild!',
-        'Drücke nochmal, um das \n Programm zu crashen',
-        'Lil Kim verkauft \n Tombola Lose! ',
-        'Du könntest Pornos drehen! ',
-        'Kann ich so nicht sagen, \n muss ich nackt sehen!',
-        'Bei Tinder saht ihr \n besser aus',
-        'Justin hat einen \n normal Großen',
-        'Komm in die Gruppe!'
-        'Call for free sex: 015226111896',
-
-        ]
- 
+    PHRASES = []
     CAPTURE_DELAY   = 4
     VIEW_TIME       = 6
     UPLOAD_SCREEN   = 6
@@ -163,6 +36,7 @@ class PhotoBox():
     
     
     def __init__(self):
+        self.load_phrases()
         self.ci = captureImage()
         self.tk = tk.Tk()
         self.button = Button(26, pull_up=True, bounce_time=0.3) #Taster an Pin 26 und Gnd ("die beiden Pins vorne rechts"
@@ -190,6 +64,10 @@ class PhotoBox():
         #GPIO.add_event_detect(21, GPIO.RISING, callback=self._uploadPicture, bouncetime=300)
 
         self.tk.mainloop()
+
+    def load_phrases(self):
+        with open("phrases.txt", "r") as file:
+            self.PHRASES = [line.strip().replace("\\n", "\n") for line in file if line.strip()]
 
     def toggle_fullscreen(self, event=None):
         self.fullScreenState = not self.fullScreenState  # Just toggling the boolean
@@ -272,7 +150,7 @@ class PhotoBox():
         
         except gp.GPhoto2Error:
             logger.exception("GPhoto2Error")
-            self._changeText("Oh, an error occurred. \n\n Just try again later.")
+            self._changeText("Oh, an error occurred. \n\n Inform a WG member.")
             self.tk.after(2000)
 #             self._changeText("Photobox startet neu...")
 #             photoBox.start()
