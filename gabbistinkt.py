@@ -16,6 +16,10 @@ import os
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+import sys
+import logging
+
+logger = logging.getLogger(__name__)
 
 class PhotoBox():
 
@@ -204,6 +208,7 @@ class PhotoBox():
         self.activeTrigger = False
 
     def _triggerCapture(self, channel=0):
+        logger.debug("Button pressed")
         if not self.activeTrigger:
             self.activeTrigger = True
             self._countdown(self.CAPTURE_DELAY, self._takePicture)
@@ -266,7 +271,8 @@ class PhotoBox():
 #                 self.tk.destroy()
         
         except gp.GPhoto2Error:
-            self._changeText(str(gp.GPhoto2Error))#"Oh, an error occurred. \n\n Just try again later.")
+            logger.exception("GPhoto2Error")
+            self._changeText("Oh, an error occurred. \n\n Just try again later.")
             self.tk.after(2000)
 #             self._changeText("Photobox startet neu...")
 #             photoBox.start()
@@ -403,7 +409,7 @@ class PhotoBox():
 
     def _countdown(self, remaining = None, callback = lambda: True):
         if remaining is not None:
-            self.remaining = remaining
+            self.remaining = remaining * 10
         
         if remaining is not None:
             self.countdown_callback = callback
@@ -417,9 +423,9 @@ class PhotoBox():
 #             if not creds or not creds.valid:
 #                 if creds and creds.expired and creds.refresh_token:
 #                     creds.refresh(Request())
-                self._changeText(str(self.remaining))
+                self._changeText(str(random.choice(self.PHRASES)) + "\n" + str(self.remaining / 10))
             self.remaining = self.remaining - 1
-            self.tk.after(1000, self._countdown)
+            self.tk.after(100, self._countdown)
         
 
    # def __del__(self):
@@ -427,6 +433,8 @@ class PhotoBox():
    #     GPIO.cleanup()
 
 def _startMain():
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+
     #from gpiozero import Button
     photoBox = PhotoBox()
     photoBox.start()
