@@ -8,19 +8,14 @@ import tkinter as tk
 import gphoto2 as gp
 from captureImage import captureImage
 from tkinter.font import Font
-import RPi.GPIO as GPIO
-import dropbox
 import random
 import threading
 from gpiozero import Button
-from PIL import Image, ImageOps, ImageTk, ImageDraw, ImageFont
+from PIL import Image, ImageOps, ImageTk
 import os
-import pandas as pd
-import time
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
-from googleapiclient.discovery import build
 
 class PhotoBox():
 
@@ -166,7 +161,6 @@ class PhotoBox():
     def __init__(self):
         self.ci = captureImage()
         self.tk = tk.Tk()
-        self.db = dropbox.Dropbox(self.ACCESS_TOKEN)
         self.button = Button(26, pull_up=True, bounce_time=0.3) #Taster an Pin 26 und Gnd ("die beiden Pins vorne rechts"
         self.tk.title("PhotoBox by Adam Marciniak (Gerpo)")
         self.tk['background'] = "#232b2b"
@@ -402,17 +396,6 @@ class PhotoBox():
                 }
         )
         print(response.text)
-              
-# Function for Dropbox Upload
-#     def _uploadPicture(self, file_from):
-# 
-#         file_name = file_from.split('/')[-1]
-#             if not creds or not creds.valid:
-#                 if creds and creds.expired and creds.refresh_token:
-#                     creds.refresh(Request())
-#         
-#         f = open(file_from, 'rb')
-#         self.db.files_upload(f.read(), file_to)
         
 
     def _changeText(self, textInput):
