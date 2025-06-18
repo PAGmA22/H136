@@ -30,14 +30,13 @@ class captureImage():
 
     def capture(self):
         camera_file_path = gp.check_result(gp.gp_camera_capture(self.camera, gp.GP_CAPTURE_IMAGE, self.context))
-        gp_camera_file = gp.gp_file_new()
 
-        camera_file = gp.check_result(gp.gp_camera_file_get(self.camera, camera_file_path.folder, camera_file_path.name, gp.GP_FILE_TYPE_NORMAL, gp_camera_file, self.context))
+        camera_file = gp.check_result(gp.gp_camera_file_get(self.camera, camera_file_path.folder, camera_file_path.name, gp.GP_FILE_TYPE_NORMAL, self.context))
         save_path = os.path.join(os.path.expanduser("~"), 'Pictures', camera_file_path.name)
         gp.gp_file_save(camera_file,save_path)
         #gp.gp_camera_file_delete(self.camera, camera_file_path.folder, camera_file_path.name, self.context)
 
-        del gp_camera_file, camera_file, camera_file_path
+        del camera_file, camera_file_path
 
         return save_path
 
