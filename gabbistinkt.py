@@ -66,7 +66,7 @@ class PhotoBox():
         self.tk.mainloop()
 
     def load_phrases(self):
-        with open("phrases.txt", "r") as file:
+        with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "phrases.txt"), "r") as file:
             self.PHRASES = [line.strip().replace("\\n", "\n") for line in file if line.strip()]
 
     def toggle_fullscreen(self, event=None):
