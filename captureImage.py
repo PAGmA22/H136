@@ -5,6 +5,7 @@ __version__ = '0.1.0'
 __license__ = 'MIT'
 
 import gphoto2 as gp
+import os
 import logging
 
 class captureImage():
@@ -31,7 +32,7 @@ class captureImage():
         camera_file_path = gp.check_result(gp.gp_camera_capture(self.camera, gp.GP_CAPTURE_IMAGE, self.context))
         camera_file = gp.check_result(gp.gp_camera_file_get(self.camera, camera_file_path.folder, camera_file_path.name, gp.GP_FILE_TYPE_NORMAL, self.context))
 
-        save_path = '/home/h136raspi/H136/Bilder/{0}'.format(camera_file_path.name)
+        save_path = os.path.join(os.path.expanduser("~"), 'Pictures', camera_file_path.name)
         gp.gp_file_save(camera_file,save_path)
         #gp.gp_camera_file_delete(self.camera, camera_file_path.folder, camera_file_path.name, self.context)
 
