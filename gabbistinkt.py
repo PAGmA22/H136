@@ -63,7 +63,11 @@ class PhotoBox():
         self.button.when_pressed = self._triggerCapture  #Taster an Pin 26 und Gnd ("die beiden Pins vorne rechts" 
         #GPIO.add_event_detect(21, GPIO.RISING, callback=self._uploadPicture, bouncetime=300)
 
+        self.tk.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.tk.mainloop()
+
+    def on_closing(self):
+        self.ci.dispose()
 
     def load_phrases(self):
         with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "phrases.txt"), "r") as file:
