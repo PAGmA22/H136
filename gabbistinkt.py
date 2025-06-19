@@ -155,7 +155,7 @@ class PhotoBox():
         except gp.GPhoto2Error:
             logger.exception("GPhoto2Error")
             self._changeText("Oh, an error occurred. \n\n Inform a WG member.")
-            self.tk.after(30000, self.tk.destroy)
+            self.tk.after(30000, self.tk.quit)
 
 #             self._changeText("Photobox startet neu...")
 #             photoBox.start()
