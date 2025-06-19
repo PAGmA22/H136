@@ -3,7 +3,8 @@
 __author__ = 'Adam Marciniak'
 __version__ = '0.1.0'
 __license__ = 'MIT'
-        
+
+import json
 import tkinter as tk
 import gphoto2 as gp
 from captureImage import captureImage
@@ -229,6 +230,9 @@ class PhotoBox():
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
+                with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token_append.json"),
+                          'w') as token:
+                    token.write(creds.to_json())
             else:
 #             if not creds or not creds.valid:
 #                 if creds and creds.expired and creds.refresh_token:
@@ -237,11 +241,24 @@ class PhotoBox():
 #                    'Documents/WG-Github/Raspberry_Pi_5/_secrets_/client_secret.json', scopes)
                     os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "client_secret.json"), scopes)
                 creds = flow.run_local_server()
+
+                creds_data = {
+                    "token": creds.token,
+                    "refresh_token": creds.refresh_token,
+                    "token_uri": creds.token_uri,
+                    "client_id": creds.client_id,
+                    "client_secret": creds.client_secret,
+                    "scopes": creds.scopes,
+                }
+
+
+                with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token_append.json"), 'w') as token:
+                    token.write(json.dump(creds_data))
+
             print(creds)
             # Save the credentials for the next run
 #            with open('Documents/WG-Github/Raspberry_Pi_5/_secrets_/token_append.json', 'w') as token:
-            with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token_append.json"), 'w') as token:
-                token.write(creds.to_json())
+
         from google.auth.transport.requests import AuthorizedSession
         authed_session = AuthorizedSession(creds)
 #             if not creds or not creds.valid:
