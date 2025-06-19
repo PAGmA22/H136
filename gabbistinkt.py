@@ -289,7 +289,7 @@ class PhotoBox():
 #                     creds.refresh(Request())pis.com/v1/mediaItems:batchCreate', 
                 headers = { 'content-type': 'application/json' },
                 json={
-                    "albumId": "AF1QipONsSfhxT0yg74jQ0fd9rYsUH1OEDHYi63w0RmY_X8SEoNh-nYbs18Ipho6KWAaHA",
+                    "albumId": "AF1QipNKQtEYoQbaRqHvqFDqsof5-09CqyYVkaQQuJUb",
                     "newMediaItems": [{
                         "description": "L&L 2025",
                         "simpleMediaItem": {
