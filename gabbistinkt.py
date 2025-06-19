@@ -277,10 +277,11 @@ class PhotoBox():
         response = authed_session.get("https://photoslibrary.googleapis.com/v1/albums")
         print(response.text)
         response = authed_session.post(
-            "https://photoslibrary.googleapis.com/v1/uploads", 
+            "https://photoslibrary.googleapis.com/v1/uploads",
             headers={},
             data=image_contents)
-        upload_token = response.text 
+        upload_token = response.text
+        print(response)
         # use batch create to add photo and description
         response = authed_session.post(
                 'https://photoslibrary.googleapis.com/v1/mediaItems:batchCreate',
@@ -302,6 +303,7 @@ class PhotoBox():
                     }]
                 }
         )
+        print(response)
         print(response.text)
         
 
