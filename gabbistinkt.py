@@ -302,7 +302,7 @@ class PhotoBox():
         else:
             if self.remaining == 0:
                 self._changeText(str(random.choice(self.PHRASES)))
-            else
+            else:
                 self._changeText(str(self.remaining))
 
             self.remaining = self.remaining - 1
