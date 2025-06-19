@@ -223,7 +223,7 @@ class PhotoBox():
 
         
     def _uploadPicture(self, file_from):
-        authed_session = auth_session()
+        authed_session = auth_session(['https://www.googleapis.com/auth/photoslibrary.appendonly'])
         # read image from file
         with open(file_from, "rb") as f:
             image_contents = f.read() 
@@ -233,6 +233,7 @@ class PhotoBox():
 #             if not creds or not creds.valid:
 #                 if creds and creds.expired and creds.refresh_token:
 #                     creds.refresh(Request())
+
         response = authed_session.post(
             "https://photoslibrary.googleapis.com/v1/uploads",
             headers={},
@@ -247,7 +248,7 @@ class PhotoBox():
 #                     creds.refresh(Request())pis.com/v1/mediaItems:batchCreate', 
                 headers = { 'content-type': 'application/json' },
                 json={
-                    "albumId": "AF1QipNKQtEYoQbaRqHvqFDqsof5-09CqyYVkaQQuJUb",
+                    "albumId": "AF1lzqksl31-M8blAP9OhrJ-yzKVi60HqP3FX3okCEH6CJSsJOc9HXI2Dk8uYZ49kGEn0YC7OZ8v",
                     "newMediaItems": [{
                         "description": "L&L 2025",
                         "simpleMediaItem": {
@@ -303,8 +304,7 @@ def _startMain():
     #GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     #_startMain()
 
-def auth_session():
-    scopes=['https://www.googleapis.com/auth/photoslibrary.appendonly']
+def auth_session(scopes):
     creds = None
     if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token.json")):
         creds = Credentials.from_authorized_user_file(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token.json"), scopes)
@@ -334,7 +334,19 @@ def auth_session():
 
     return AuthorizedSession(creds)
 
+def create_album():
+    authed_session = auth_session(['https://www.googleapis.com/auth/photoslibrary.appendonly'])
+    response = authed_session.post(
+        'https://photoslibrary.googleapis.com/v1/albums',
+        headers={'content-type': 'application/json'},
+        json={
+            "album": { "title": "Lärm und Liebe 2025", }
+        }
+    )
+    logger.debug(response.content)
+
 if __name__ == '__main__':
+    auth_session(['https://www.googleapis.com/auth/photoslibrary.appendonly'])
     try:
         _startMain()
     except KeyboardInterrupt:
