@@ -155,7 +155,8 @@ class PhotoBox():
         except gp.GPhoto2Error:
             logger.exception("GPhoto2Error")
             self._changeText("Oh, an error occurred. \n\n Inform a WG member.")
-            self.tk.after(2000)
+            self.tk.after(2000, self.tk.destroy)
+
 #             self._changeText("Photobox startet neu...")
 #             photoBox.start()
             return
@@ -325,7 +326,7 @@ def _startMain():
     #GPIO.cleanup()
     #GPIO.setmode(GPIO.BOARD)
     #GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    _startMain()
+    #_startMain()
 
 if __name__ == '__main__':
     try:
