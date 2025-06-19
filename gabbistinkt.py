@@ -16,7 +16,7 @@ from PIL import Image, ImageOps, ImageTk
 import os
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
+from google.auth.transport.requests import Request, AuthorizedSession
 import sys
 import logging
 
@@ -223,48 +223,7 @@ class PhotoBox():
 
         
     def _uploadPicture(self, file_from):
-        scopes=['https://www.googleapis.com/auth/photoslibrary.appendonly']
-        creds = None
-        if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token_append.json")):
-            creds = Credentials.from_authorized_user_file(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token_append.json"), scopes)
-        if not creds or not creds.valid:
-            if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-                with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token_append.json"),
-                          'w') as token:
-                    token.write(creds.to_json())
-            else:
-#             if not creds or not creds.valid:
-#                 if creds and creds.expired and creds.refresh_token:
-#                     creds.refresh(Request())
-                flow = InstalledAppFlow.from_client_secrets_file(
-#                    'Documents/WG-Github/Raspberry_Pi_5/_secrets_/client_secret.json', scopes)
-                    os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "client_secret.json"), scopes)
-                creds = flow.run_local_server()
-
-                creds_data = {
-                    "token": creds.token,
-                    "refresh_token": creds.refresh_token,
-                    "token_uri": creds.token_uri,
-                    "client_id": creds.client_id,
-                    "client_secret": creds.client_secret,
-                    "scopes": creds.scopes,
-                }
-
-
-                with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token_append.json"), 'w') as token:
-                    token.write(json.dump(creds_data))
-
-            print(creds)
-            # Save the credentials for the next run
-#            with open('Documents/WG-Github/Raspberry_Pi_5/_secrets_/token_append.json', 'w') as token:
-
-        from google.auth.transport.requests import AuthorizedSession
-        authed_session = AuthorizedSession(creds)
-#             if not creds or not creds.valid:
-#                 if creds and creds.expired and creds.refresh_token:
-#                     creds.refresh(Request())port AuthorizedSession
-        authed_session = AuthorizedSession(creds)
+        authed_session = auth_session()
         # read image from file
         with open(file_from, "rb") as f:
             image_contents = f.read() 
@@ -346,17 +305,39 @@ def _startMain():
     #GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     #_startMain()
 
+def auth_session():
+    scopes=['https://www.googleapis.com/auth/photoslibrary.appendonly']
+    creds = None
+    if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token.json")):
+        creds = Credentials.from_authorized_user_file(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token.json"), scopes)
+
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+            with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token.json"),
+                      'w') as token:
+                token.write(creds.to_json())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "client_secret.json"), scopes)
+            creds = flow.run_local_server()
+
+            creds_data = {
+                "token": creds.token,
+                "refresh_token": creds.refresh_token,
+                "token_uri": creds.token_uri,
+                "client_id": creds.client_id,
+                "client_secret": creds.client_secret,
+                "scopes": creds.scopes,
+            }
+
+            with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token.json"), 'w') as token:
+                json.dump(creds_data, token)
+
+    return AuthorizedSession(creds)
+
 if __name__ == '__main__':
     try:
-#             if not creds or not creds.valid:
-#                 if creds and creds.expired and creds.refresh_token:
-#                     creds.refresh(Request())
         _startMain()
     except KeyboardInterrupt:
         print('Bye')
-       # GPIO.cleanup()
-    #except RuntimeError:
-    #    print('Bye')
-#             if not creds or not creds.valid:
-#                 if creds and creds.expired and creds.refresh_token:
-#                     creds.refresh(Request())
