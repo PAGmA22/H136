@@ -84,7 +84,7 @@ class PhotoBox():
         return "break"
 
     def reset(self):
-        self._changeText("Hit the black button! \n\n #bierfest2024 \n #lärmundliebe \n #H136 ")
+        self._changeText("Hit the black button! \n\n #bierfest2025 \n #lärmundliebe \n #H136 ")
         self.content['image'] = ""
         self.uploadable = False
         self.activeTrigger = False
@@ -273,7 +273,7 @@ class PhotoBox():
                 json={
                     "albumId": "APc8FD7ApQQ-FvKFPD-DjFxw-Thzs9P-ss8T8R2hkOLRt7wnaUHdIjJmBfSmF7ccEvGiPXEKgeON",
                     "newMediaItems": [{
-                        "description": "L&L 2024",
+                        "description": "L&L 2025",
                         "simpleMediaItem": {
                             "uploadToken": upload_token,
 #             if not creds or not creds.valid:
