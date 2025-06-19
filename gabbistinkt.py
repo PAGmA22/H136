@@ -233,14 +233,12 @@ class PhotoBox():
 #             if not creds or not creds.valid:
 #                 if creds and creds.expired and creds.refresh_token:
 #                     creds.refresh(Request())
-        response = authed_session.get("https://photoslibrary.googleapis.com/v1/albums")
-        print(response.text)
         response = authed_session.post(
             "https://photoslibrary.googleapis.com/v1/uploads",
             headers={},
             data=image_contents)
         upload_token = response.text
-        print(response)
+        logger.debug(response)
         # use batch create to add photo and description
         response = authed_session.post(
                 'https://photoslibrary.googleapis.com/v1/mediaItems:batchCreate',
