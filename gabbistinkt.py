@@ -292,7 +292,7 @@ class PhotoBox():
 
     def _countdown(self, remaining = None, callback = lambda: True):
         if remaining is not None:
-            self.remaining = remaining * 10
+            self.remaining = remaining
         
         if remaining is not None:
             self.countdown_callback = callback
@@ -302,13 +302,9 @@ class PhotoBox():
         else:
             if self.remaining == 0:
                 self._changeText(str(random.choice(self.PHRASES)))
-            else:
-#             if not creds or not creds.valid:
-#                 if creds and creds.expired and creds.refresh_token:
-#                     creds.refresh(Request())
-                self._changeText(str(random.choice(self.PHRASES)) + "\n" + str(self.remaining / 10))
+
             self.remaining = self.remaining - 1
-            self.tk.after(100, self._countdown)
+            self.tk.after(1000, self._countdown)
         
 
    # def __del__(self):
