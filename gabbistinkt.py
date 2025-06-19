@@ -32,7 +32,6 @@ class PhotoBox():
     SHARE_SCREEN_TIME = 3
     IMAGE_WIDTH     = 6000  #Check in Camera
     IMAGE_HEIGHT    = 3368  #Check in Camera
-    ACCESS_TOKEN    = "tVHhWyFKDpQAAAAAAAAAAb8g7DrQHiH3g6_OvGp7e5d6-vY0_ULhzArV82oJBPqY"
     
     
     def __init__(self):
@@ -40,7 +39,7 @@ class PhotoBox():
         self.ci = captureImage()
         self.tk = tk.Tk()
         self.button = Button(26, pull_up=True, bounce_time=0.3) #Taster an Pin 26 und Gnd ("die beiden Pins vorne rechts"
-        self.tk.title("PhotoBox by Adam Marciniak (Gerpo)")
+        self.tk.title("PhotoBox by Adam Marciniak (Gerpo), polished by Maximilian H.")
         self.tk['background'] = "#232b2b"
         self.font = Font(family="Arial", size=72)
         self.tk.bind("<F11>", self.toggle_fullscreen)
@@ -225,8 +224,8 @@ class PhotoBox():
     def _uploadPicture(self, file_from):
         scopes=['https://www.googleapis.com/auth/photoslibrary.appendonly']
         creds = None
-        if os.path.exists('_secrets_/token_append.json'):
-            creds = Credentials.from_authorized_user_file('_secrets_/token_append.json', scopes)
+        if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token_append.json")):
+            creds = Credentials.from_authorized_user_file(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token_append.json"), scopes)
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
@@ -236,12 +235,12 @@ class PhotoBox():
 #                     creds.refresh(Request())
                 flow = InstalledAppFlow.from_client_secrets_file(
 #                    'Documents/WG-Github/Raspberry_Pi_5/_secrets_/client_secret.json', scopes)
-                    '_secrets_/client_secret.json', scopes)
+                    os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "client_secret.json"), scopes)
                 creds = flow.run_local_server()
             print(creds)
             # Save the credentials for the next run
 #            with open('Documents/WG-Github/Raspberry_Pi_5/_secrets_/token_append.json', 'w') as token:
-            with open('_secrets_/token_append.json', 'w') as token:
+            with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "_secrets_", "token_append.json"), 'w') as token:
                 token.write(creds.to_json())
         from google.auth.transport.requests import AuthorizedSession
         authed_session = AuthorizedSession(creds)
@@ -258,6 +257,8 @@ class PhotoBox():
 #             if not creds or not creds.valid:
 #                 if creds and creds.expired and creds.refresh_token:
 #                     creds.refresh(Request())
+        response = authed_session.get("https://photoslibrary.googleapis.com/v1/albums")
+        print(response.text)
         response = authed_session.post(
             "https://photoslibrary.googleapis.com/v1/uploads", 
             headers={},
@@ -271,7 +272,7 @@ class PhotoBox():
 #                     creds.refresh(Request())pis.com/v1/mediaItems:batchCreate', 
                 headers = { 'content-type': 'application/json' },
                 json={
-                    "albumId": "APc8FD7ApQQ-FvKFPD-DjFxw-Thzs9P-ss8T8R2hkOLRt7wnaUHdIjJmBfSmF7ccEvGiPXEKgeON",
+                    "albumId": "AF1QipONsSfhxT0yg74jQ0fd9rYsUH1OEDHYi63w0RmY_X8SEoNh-nYbs18Ipho6KWAaHA",
                     "newMediaItems": [{
                         "description": "L&L 2025",
                         "simpleMediaItem": {
